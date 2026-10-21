@@ -28,16 +28,35 @@ file in this folder points at it (default: `../career-ops`). Edit that file to p
 
 ## Run it
 
+### As a Mac app (recommended)
+
 Requires Node.js 22.6+ and Claude Code (signed in with your own account).
 
 ```bash
+cd box-office/desktop
+npm install
+npm run install-app      # builds Box Office.app, signs it for this Mac, installs it into Applications
+```
+
+Then open **Box Office** from Launchpad or Spotlight. The first launch installs and builds
+everything (a few minutes, with progress on screen); after that it opens in seconds and rebuilds
+itself only after an update. Quitting the app stops the local server.
+
+The app looks for this folder at `~/Documents/box-office`. If it lives somewhere else, the app
+asks you to pick it (or use **Box Office → Change Box Office Folder…**).
+
+The first time you open a personally built app, macOS may ask you to confirm: right-click
+**Box Office** in Applications and choose **Open**.
+
+### In a browser
+
+```bash
 cd box-office
-npm install                         # core scripts + the browser used for PDFs and pre-fill
-node plugins/h1b-sponsor/install-h1b-index.mjs   # sponsorship data (~8 MB), once
+npm install
 cd web
 npm ci
 npm run build
-npm start                           # then open http://localhost:3000/sheet
+npm start                # then open http://localhost:3000/sheet
 ```
 
 The first time, open **Config** in the app and pick Claude Code as your CLI.

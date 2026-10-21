@@ -14,7 +14,6 @@ import { PipelineProvider } from "@/components/pipeline/pipeline-provider";
 import { ApplyProvider } from "@/components/apply/apply-provider";
 import { ExploreProvider } from "@/components/explore/explore-provider";
 import { FirstScoreView } from "@/components/explore/first-score-view";
-import { BetaBanner } from "@/components/beta/beta-banner";
 import { WorkerPills } from "@/components/jobs/worker-pills";
 import { UsageMeter } from "@/components/usage-meter";
 import { HeroGlow } from "@/components/hero-glow";
@@ -30,8 +29,11 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
       <div aria-hidden className="bo-drag-strip" />
       {/* The glow sits behind the whole window so the glass layers (sidebar,
           toolbars, the Today card) have something to refract. */}
-      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[600px]">
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[680px] [mask-image:linear-gradient(to_bottom,black_45%,transparent)]">
         <HeroGlow />
+        {/* The same soft frosting the original Today card used, so the grain
+            reads as a glow wherever there's no glass over it. */}
+        <div className="absolute inset-0 z-[1] bg-background/50 backdrop-blur-[3px]" />
       </div>
       <MobileNav followupsEnabled={followupsEnabled} />
       <div className="relative z-10 flex min-h-screen">
@@ -80,7 +82,7 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
               </div>
               <ThemeToggle showLabel />
               <div className="px-1">
-                <span className="text-[11px] text-faint">Runs on this Mac · built on career-ops</span>
+                <span className="text-[11px] text-faint">Runs on this Mac</span>
               </div>
             </div>
           </div>
@@ -90,7 +92,6 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
         <AssistantConsole />
         <BackToTop />
         <FirstScoreView />
-        <BetaBanner />
       </div>
       </ExploreProvider>
       </ApplyProvider>

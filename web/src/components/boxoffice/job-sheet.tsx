@@ -253,7 +253,7 @@ export function JobSheet({ rows }: { rows: SheetRow[] }) {
         >
           {sponsorOnly ? "✓ " : ""}Sponsors only
         </button>
-        <label className="glass-control ml-auto flex min-h-[34px] w-full items-center gap-1.5 rounded-full px-3 sm:w-56 max-sm:min-h-[44px]">
+        <label className="glass-control ml-auto flex min-h-[34px] w-full items-center gap-1.5 rounded-full px-3 sm:w-44 max-sm:min-h-[44px]">
           <Search className="size-3.5 shrink-0 text-muted" aria-hidden />
           <span className="sr-only">Search jobs</span>
           <input
@@ -514,7 +514,7 @@ function AddJob({ existing, onAdded, onMessage }: { existing: string[]; onAdded:
     }
   };
   return (
-    <form onSubmit={submit} className="glass-control flex min-h-[34px] w-full items-center gap-1 rounded-full py-[3px] pl-3 pr-[3px] sm:w-[300px] max-sm:min-h-[44px]">
+    <form onSubmit={submit} className="glass-control flex min-h-[34px] w-full items-center gap-1 rounded-full py-[3px] pl-3 pr-[3px] sm:w-[250px] max-sm:min-h-[44px]">
       <label className="sr-only" htmlFor="bo-add-job">
         Job posting link
       </label>

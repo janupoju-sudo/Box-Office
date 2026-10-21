@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { careerOpsRoot, findApplication, pdfPathStatusForReport, readReport } from "@/lib/career-ops";
 import { parseReport } from "@/lib/format";
 import { resolvePostingUrl } from "@/lib/posting-url.mjs";
-import { reportFieldValue, scoreNumber, tableValue } from "@/lib/applydesk/sheet-parse.mjs";
-import { docFileName } from "@/lib/applydesk/doc-names.mjs";
-import { ApplyReview } from "@/components/applydesk/apply-review";
+import { reportFieldValue, scoreNumber, tableValue } from "@/lib/boxoffice/sheet-parse.mjs";
+import { docFileName } from "@/lib/boxoffice/doc-names.mjs";
+import { ApplyReview } from "@/components/boxoffice/apply-review";
 
 export const dynamic = "force-dynamic";
 

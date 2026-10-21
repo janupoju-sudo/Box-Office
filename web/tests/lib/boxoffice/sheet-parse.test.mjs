@@ -1,5 +1,5 @@
-// applydesk: Job Sheet helpers.
-// Run:  node --test tests/lib/applydesk/sheet-parse.test.mjs
+// Box Office: Job Sheet helpers.
+// Run:  node --test tests/lib/boxoffice/sheet-parse.test.mjs
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -13,8 +13,8 @@ import {
   sponsorBadge,
   statusGroup,
   tableValue,
-} from "../../../src/lib/applydesk/sheet-parse.mjs";
-import { docFileName } from "../../../src/lib/applydesk/doc-names.mjs";
+} from "../../../src/lib/boxoffice/sheet-parse.mjs";
+import { docFileName } from "../../../src/lib/boxoffice/doc-names.mjs";
 
 const REPORT = `# Evaluation: Acme -- Data Scientist
 

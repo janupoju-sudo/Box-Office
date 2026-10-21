@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { sheetRows } from "@/lib/applydesk/sheet-rows";
-import { JobSheet } from "@/components/applydesk/job-sheet";
+import { sheetRows } from "@/lib/boxoffice/sheet-rows";
+import { JobSheet } from "@/components/boxoffice/job-sheet";
 
 export const dynamic = "force-dynamic"; // always read fresh local files
 

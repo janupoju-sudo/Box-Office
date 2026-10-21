@@ -1,0 +1,49 @@
+{
+  "name": "box-office-desktop",
+  "productName": "Box Office",
+  "version": "0.1.0",
+  "description": "Jarvis, find me a job. The Box Office Mac app.",
+  "private": true,
+  "main": "main.js",
+  "type": "commonjs",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js",
+    "dist": "electron-builder --mac dir",
+    "install-app": "node scripts/install-app.mjs"
+  },
+  "build": {
+    "appId": "app.boxoffice.desktop",
+    "productName": "Box Office",
+    "copyright": "Box Office contributors. Built on career-ops (MIT).",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "splash.html",
+      "lib/**",
+      "package.json"
+    ],
+    "asar": true,
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dir"
+        }
+      ],
+      "identity": null,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "darkModeSupport": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3"
+  }
+}

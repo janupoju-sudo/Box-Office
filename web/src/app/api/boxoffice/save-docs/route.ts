@@ -1,11 +1,11 @@
-// applydesk: copy this job's tailored CV and cover letter PDFs into the user's
+// Box Office: copy this job's tailored CV and cover letter PDFs into the user's
 // Applications/CVs and Applications/Cover Letters folders, named after the job,
 // so every version sent is kept in one place outside output/.
 import fs from "node:fs";
 import path from "node:path";
 import { careerOpsRoot, findApplication, pdfPathStatusForReport } from "@/lib/career-ops";
 import { readJsonObject } from "@/lib/json-body";
-import { docFileName } from "@/lib/applydesk/doc-names.mjs";
+import { docFileName } from "@/lib/boxoffice/doc-names.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

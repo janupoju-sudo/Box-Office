@@ -1,4 +1,4 @@
-// applydesk: pure helpers for the Job Sheet (plain .mjs so tests can import
+// Box Office: pure helpers for the Job Sheet (plain .mjs so tests can import
 // them directly under Node, like the rest of web/src/lib).
 
 /**

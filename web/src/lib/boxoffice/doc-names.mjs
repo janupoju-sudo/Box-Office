@@ -1,4 +1,4 @@
-// applydesk: file names for saved application documents.
+// Box Office: file names for saved application documents.
 
 /**
  * "Company - Role - CV.pdf", safe on macOS, Windows and Linux.

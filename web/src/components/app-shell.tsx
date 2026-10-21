@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
-import { AppMark } from "@/components/applydesk/app-mark";
-import { APP_NAME } from "@/lib/applydesk/brand";
+import { AppMark } from "@/components/boxoffice/app-mark";
+import { APP_NAME, APP_TAGLINE } from "@/lib/boxoffice/brand";
 import { AssistantConsole } from "@/components/assistant-console";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -32,8 +32,11 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
         <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-border bg-surface/30 p-4 md:flex">
           <Link href="/" className="mb-8 flex items-center gap-2.5 px-1">
             <AppMark size={32} />
-            <span className={`${instrumentSerif.className} relative -top-px text-2xl font-normal tracking-tight text-landing`}>
-              {APP_NAME}
+            <span className="flex min-w-0 flex-col">
+              <span className={`${instrumentSerif.className} relative -top-px text-2xl font-normal leading-none tracking-tight text-landing`}>
+                {APP_NAME}
+              </span>
+              <span className="mt-1 text-[11px] leading-none text-faint">{APP_TAGLINE}</span>
             </span>
           </Link>
           <nav className="flex flex-col gap-1">

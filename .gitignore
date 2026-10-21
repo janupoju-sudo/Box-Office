@@ -281,3 +281,7 @@ data/interview-prep/
 .next/
 web/.next/
 web/out/
+
+# Box Office desktop app build output
+/desktop/node_modules/
+/desktop/dist/

@@ -9,7 +9,7 @@ import { useJobs } from "@/components/jobs/job-store";
 import { GeneratePdfButton } from "@/components/generate-pdf-button";
 import { CoverDraftButton } from "@/components/cover-draft-button";
 import { ApplyButton } from "@/components/apply-button";
-import { scoreTone, sponsorBadge } from "@/lib/applydesk/sheet-parse.mjs";
+import { scoreTone, sponsorBadge } from "@/lib/boxoffice/sheet-parse.mjs";
 
 type Sponsor = { found: boolean; tier: string; name: string; lca: number | null; perm: number | null; lastYear: number | null; installed: boolean };
 
@@ -42,7 +42,7 @@ export function ApplyReview(p: Props) {
   useEffect(() => {
     if (!p.company) return;
     let cancelled = false;
-    fetch(`/api/applydesk/sponsor?company=${encodeURIComponent(p.company)}`)
+    fetch(`/api/boxoffice/sponsor?company=${encodeURIComponent(p.company)}`)
       .then((r) => r.json())
       .then((d: Sponsor) => !cancelled && setSponsor(d))
       .catch(() => {});
@@ -70,7 +70,7 @@ export function ApplyReview(p: Props) {
   const saveDocs = async () => {
     setSave({ busy: true, msg: "", ok: false });
     try {
-      const res = await fetch("/api/applydesk/save-docs", {
+      const res = await fetch("/api/boxoffice/save-docs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ n: p.n, coverText }),

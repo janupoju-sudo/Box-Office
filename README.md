@@ -1,4 +1,4 @@
-> **This is applydesk, a fork of career-ops.** See [APPLYDESK.md](APPLYDESK.md) for what it adds and how to run it. career-ops is created by @santifer and contributors under the MIT license; "career-ops" is their trademark.
+> **This is Box Office ("Jarvis, find me a job."), a fork of career-ops.** See [BOX-OFFICE.md](BOX-OFFICE.md) for what it adds and how to run it. career-ops is created by @santifer and contributors under the MIT license; "career-ops" is their trademark.
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/wordmark-dark.svg"><img src="docs/wordmark-light.svg" alt="career-ops" width="250" height="56"></picture></p>
 

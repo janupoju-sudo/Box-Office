@@ -1,4 +1,6 @@
-# applydesk
+# Box Office
+
+*"Jarvis, find me a job."*
 
 A local-first job search desk, forked from [career-ops](https://github.com/career-ops-hq/career-ops) (MIT).
 It adds a spreadsheet-style **Job Sheet** and a guided **Apply** flow on top of career-ops' web app.
@@ -29,7 +31,7 @@ file in this folder points at it (default: `../career-ops`). Edit that file to p
 Requires Node.js 22.6+ and Claude Code (signed in with your own account).
 
 ```bash
-cd applydesk
+cd box-office
 npm install                         # core scripts + the browser used for PDFs and pre-fill
 node plugins/h1b-sponsor/install-h1b-index.mjs   # sponsorship data (~8 MB), once
 cd web

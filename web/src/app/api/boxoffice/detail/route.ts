@@ -1,7 +1,7 @@
-// applydesk: the job description + evaluation for one tracked job, split out
+// Box Office: the job description + evaluation for one tracked job, split out
 // of its career-ops report so the Job Sheet's side panel can show both.
 import { readReport } from "@/lib/career-ops";
-import { splitReport } from "@/lib/applydesk/sheet-parse.mjs";
+import { splitReport } from "@/lib/boxoffice/sheet-parse.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

@@ -1,4 +1,4 @@
-// applydesk: H-1B sponsorship signal for one employer, from the bundled
+// Box Office: H-1B sponsorship signal for one employer, from the bundled
 // h1b-sponsor plugin's LOCAL index of US Department of Labor filings
 // (plugins/h1b-sponsor). Nothing leaves the machine. The plugin keeps its own
 // disk cache; this adds an in-process one so a sheet reload is instant.

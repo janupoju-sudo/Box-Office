@@ -1,11 +1,11 @@
-// applydesk: one spreadsheet-style row per job, merging the two places
+// Box Office: one spreadsheet-style row per job, merging the two places
 // career-ops keeps jobs — the inbox (data/pipeline.md, not yet evaluated) and
 // the tracker (data/applications.md, evaluated, with a report). Read-only.
 import { pipelineSummary, readReport, type Application, type InboxJob } from "@/lib/career-ops";
 import { parseReport } from "@/lib/format";
 import { pendingInbox } from "@/lib/inbox-pending.mjs";
 import { resolvePostingUrl } from "@/lib/posting-url.mjs";
-import { reportFieldValue, payFromReport, scoreNumber, normalizeUrlKey } from "@/lib/applydesk/sheet-parse.mjs";
+import { reportFieldValue, payFromReport, scoreNumber, normalizeUrlKey } from "@/lib/boxoffice/sheet-parse.mjs";
 
 export type SheetRow = {
   /** Stable React key. */

@@ -8,7 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Badge } from "@/components/ui/badge";
 import { useJobs } from "@/components/jobs/job-store";
-import type { SheetRow } from "@/lib/applydesk/sheet-rows";
+import type { SheetRow } from "@/lib/boxoffice/sheet-rows";
 import {
   SPONSOR_RANK,
   STATUS_GROUPS,
@@ -16,7 +16,7 @@ import {
   scoreTone,
   sponsorBadge,
   statusGroup,
-} from "@/lib/applydesk/sheet-parse.mjs";
+} from "@/lib/boxoffice/sheet-parse.mjs";
 
 type Sponsor = { found: boolean; tier: string; name: string; lca: number | null; perm: number | null; lastYear: number | null; installed: boolean };
 type SortKey = "company" | "role" | "score" | "sponsor" | "status" | "date";
@@ -37,7 +37,7 @@ function useSponsors(companies: string[]) {
       while (queue.length && !cancelled) {
         const company = queue.shift()!;
         try {
-          const res = await fetch(`/api/applydesk/sponsor?company=${encodeURIComponent(company)}`);
+          const res = await fetch(`/api/boxoffice/sponsor?company=${encodeURIComponent(company)}`);
           const data = (await res.json()) as Sponsor;
           if (!cancelled) setMap((m) => ({ ...m, [company.toLowerCase()]: data }));
         } catch {
@@ -347,7 +347,7 @@ function AddJob({ existing, onAdded }: { existing: string[]; onAdded: () => void
       const res = await fetch("/api/explore/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ offers: [{ url: u, company: "", title: "", location: "", postedAt: "", ats: "", source: "applydesk" }] }),
+        body: JSON.stringify({ offers: [{ url: u, company: "", title: "", location: "", postedAt: "", ats: "", source: "boxoffice" }] }),
       });
       const data = (await res.json()) as { added?: number; error?: string };
       if (data.error || !data.added) {
@@ -407,7 +407,7 @@ function DetailPanel({
     if (row.kind !== "tracked" || !row.n) return;
     let cancelled = false;
     setLoading(true);
-    fetch(`/api/applydesk/detail?n=${encodeURIComponent(row.n)}`)
+    fetch(`/api/boxoffice/detail?n=${encodeURIComponent(row.n)}`)
       .then((r) => r.json())
       .then((d: { jd?: string; evaluation?: string }) => {
         if (!cancelled) setDetail({ jd: d.jd ?? "", evaluation: d.evaluation ?? "" });

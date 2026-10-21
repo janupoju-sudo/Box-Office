@@ -1,34 +1,26 @@
+// Box Office: the app uses the Mac's system fonts. Nothing is fetched from a
+// font host at build or run time, and nothing is vendored.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const fontsSource = readFileSync(new URL("../../src/lib/fonts.ts", import.meta.url), "utf8");
-const assets = [
-  "../../src/assets/fonts/inter/Inter-Latin-Variable.woff2",
-  "../../src/assets/fonts/instrument-serif/InstrumentSerif-Latin-Regular.woff2",
-  "../../src/assets/fonts/instrument-serif/InstrumentSerif-Latin-Italic.woff2",
-];
+const css = readFileSync(new URL("../../src/app/globals.css", import.meta.url), "utf8");
 
-test("web fonts are local and never use the Google build-time loader", () => {
-  assert.match(fontsSource, /next\/font\/local/);
+test("fonts never use the Google build-time loader or a remote font", () => {
   assert.doesNotMatch(fontsSource, /next\/font\/google/);
+  assert.doesNotMatch(css, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
 });
 
-test("every configured WOFF2 asset is vendored", () => {
-  for (const relativePath of assets) {
-    const bytes = readFileSync(new URL(relativePath, import.meta.url));
-    assert.equal(bytes.subarray(0, 4).toString("ascii"), "wOF2", `${relativePath} is not a WOFF2 file`);
-    const configuredPath = relativePath.replace("../../src/", "../");
-    const escapedPath = configuredPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    assert.match(fontsSource, new RegExp(`path:\\s*["']${escapedPath}["']`));
+test("the theme uses the system (SF Pro) font stack", () => {
+  for (const token of ["--font-sans", "--font-display", "--font-mono"]) {
+    const line = css.split("\n").find((l) => l.trim().startsWith(`${token}:`));
+    assert.ok(line, `${token} is defined`);
+    assert.match(line, /-apple-system|ui-monospace/, `${token} starts from the system stack`);
   }
 });
 
-test("both vendored font families include their OFL license", () => {
-  for (const relativePath of [
-    "../../src/assets/fonts/inter/OFL.txt",
-    "../../src/assets/fonts/instrument-serif/OFL.txt",
-  ]) {
-    assert.match(readFileSync(new URL(relativePath, import.meta.url), "utf8"), /SIL OPEN FONT LICENSE Version 1\.1/);
-  }
+test("page titles resolve to the system display style", () => {
+  assert.match(fontsSource, /instrumentSerif[^=]*=\s*\{\s*className:\s*"bo-display"/);
+  assert.match(css, /\.bo-display\s*\{/);
 });

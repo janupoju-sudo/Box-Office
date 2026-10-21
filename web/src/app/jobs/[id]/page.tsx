@@ -36,7 +36,7 @@ export default function JobPage({ params }: { params: Promise<{ id: string }> })
       <section className="dot-bg relative mt-5 overflow-hidden rounded-2xl border border-border bg-surface/40 px-6 py-7">
         {job.status === "running" && <HeroGlow />}
         <div className="relative z-10">
-          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+          <p className="flex items-center gap-2 text-xs font-semibold text-faint">
             {job.status === "running" ? (
               <><Loader2 className="size-3 animate-spin text-brand" /> working</>
             ) : job.status === "done" ? (
@@ -78,7 +78,7 @@ export default function JobPage({ params }: { params: Promise<{ id: string }> })
 
       {job.text && (
         <div className="mt-8">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Output</h2>
+          <h2 className="text-xs font-semibold text-muted">Output</h2>
           <div className="report-prose mt-3 rounded-2xl border border-border bg-surface/40 p-5">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{job.text}</ReactMarkdown>
           </div>

@@ -1,35 +1,13 @@
-import localFont from "next/font/local";
+// Box Office uses the Mac's own typefaces (SF Pro Text / SF Pro Display / SF Mono)
+// through the system font stack defined in app/globals.css (--font-sans,
+// --font-display, --font-mono). Nothing is downloaded or bundled, so the app
+// reads like a native Mac app and an offline build never contacts a font host.
+//
+// These objects keep the shape the components already use (`.className`,
+// `.variable`): `instrumentSerif.className` now resolves to the bold system
+// display style (`bo-display`), so every page title switches in one place.
+type SystemFont = { readonly className: string; readonly variable: string };
 
-// Body / UI — Inter, same as the career-ops-docs home. The latin variable
-// subset is vendored so an offline production build never contacts Google.
-export const inter = localFont({
-  src: [{
-    path: "../assets/fonts/inter/Inter-Latin-Variable.woff2",
-    weight: "100 900",
-    style: "normal",
-  }],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-// Editorial display — Instrument Serif. Regular and italic mirror the docs
-// typography while remaining fully local at build and runtime.
-export const instrumentSerif = localFont({
-  src: [{
-    path: "../assets/fonts/instrument-serif/InstrumentSerif-Latin-Regular.woff2",
-    weight: "400",
-    style: "normal",
-  }],
-  variable: "--font-instrument-serif",
-  display: "swap",
-});
-
-export const instrumentSerifItalic = localFont({
-  src: [{
-    path: "../assets/fonts/instrument-serif/InstrumentSerif-Latin-Italic.woff2",
-    weight: "400",
-    style: "italic",
-  }],
-  variable: "--font-instrument-serif-italic",
-  display: "swap",
-});
+export const inter: SystemFont = { className: "font-sans", variable: "" };
+export const instrumentSerif: SystemFont = { className: "bo-display", variable: "" };
+export const instrumentSerifItalic: SystemFont = { className: "bo-display italic", variable: "" };

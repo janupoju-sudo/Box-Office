@@ -56,7 +56,7 @@ export function ApplyChecklist({
         <ArrowLeft className="size-4" /> Pipeline
       </Link>
       <header className="mt-5">
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-faint">Apply checklist</p>
+        <p className="text-xs font-semibold text-faint">Apply checklist</p>
         <h1 className="mt-2 font-display text-3xl tracking-tight text-landing">{company}</h1>
         {role && <p className="mt-1 text-muted">{role}</p>}
         <Link href={reportHref} className="mt-3 inline-flex text-sm text-brand hover:underline">
@@ -154,7 +154,7 @@ export function ApplyChecklist({
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mt-8">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">{title}</h2>
+      <h2 className="text-sm font-semibold text-muted">{title}</h2>
       <div className="mt-3">{children}</div>
     </section>
   );

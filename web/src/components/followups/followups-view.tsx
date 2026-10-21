@@ -309,7 +309,7 @@ export function FollowupsView() {
 
       {data?.available && upcoming.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">Upcoming</h2>
+          <h2 className="text-sm font-semibold text-muted">Upcoming</h2>
           <p className="mt-1 text-xs text-faint">These have a next date and are not due yet.</p>
           <ul className="mt-3 divide-y divide-border rounded-2xl border border-border">
             {upcoming.map((entry) => (

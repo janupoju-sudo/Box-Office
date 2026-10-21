@@ -105,7 +105,7 @@ function Studio({ n, data }: { n: string; data: Loaded }) {
     <>
       <header className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-faint">CV Studio</p>
+          <p className="text-xs font-semibold text-faint">CV Studio</p>
           <h1 className="mt-1 font-display text-3xl tracking-tight text-landing">{data.company}</h1>
           <p className="mt-1 text-sm text-muted">
             {changed} {changed === 1 ? "change" : "changes"} from your base CV. Review each one, then save the version you will send.

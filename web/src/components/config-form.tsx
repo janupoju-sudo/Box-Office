@@ -108,7 +108,7 @@ export function ConfigForm() {
       </p>
 
       {/* Engine mode */}
-      <label className="mt-8 mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+      <label className="mt-8 mb-2 block text-xs font-semibold text-muted">
         AI Engine
       </label>
       <div className="grid gap-2 sm:grid-cols-3">
@@ -235,7 +235,7 @@ export function ConfigForm() {
         {mode === "key" && (
           <div className="space-y-5">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+              <label className="mb-2 block text-xs font-semibold text-muted">
                 Provider
               </label>
               <div className="grid gap-2 sm:grid-cols-2">
@@ -257,7 +257,7 @@ export function ConfigForm() {
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+              <label className="mb-1 block text-xs font-semibold text-muted">
                 Paste an AI key
               </label>
               <p className="mb-2 text-xs text-faint">Bring a key from OpenAI, Anthropic, and others.</p>
@@ -284,7 +284,7 @@ export function ConfigForm() {
       </div>
 
       {/* Appearance / privacy */}
-      <label className="mt-8 mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+      <label className="mt-8 mb-2 block text-xs font-semibold text-muted">
         Appearance
       </label>
       <button

@@ -97,7 +97,7 @@ export function ReportView({
       </Link>
 
       <header className="mt-5">
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-faint">#{id}</p>
+        <p className="text-xs font-semibold text-faint">#{id}</p>
         <div className="mt-2 flex items-center gap-3">
           <CompanyLogo name={company?.logoName ?? meta?.title ?? `Report #${id}`} size={40} />
           <h1 className="font-display text-3xl tracking-tight text-landing">
@@ -173,7 +173,7 @@ export function ReportView({
               : "border-border bg-surface/50";
             const callout = (
               <div className={`rounded-2xl border px-5 py-5 ${verdictClass}`}>
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">Verdict</p>
+                <p className="text-[11px] font-semibold text-faint">Verdict</p>
                 <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1">
                   {score ? (
                     <p className="font-display text-4xl tabular-nums tracking-tight text-landing">{score}</p>
@@ -243,7 +243,7 @@ export function ReportView({
 
                 {machine.length > 0 && (
                   <>
-                    <div className="mt-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.14em] text-faint">
+                    <div className="mt-6 flex items-center gap-3 text-[11px] text-faint">
                       <span className="h-px flex-1 bg-border" />
                       Technical details · for developers
                       <span className="h-px flex-1 bg-border" />

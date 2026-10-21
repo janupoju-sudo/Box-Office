@@ -40,7 +40,7 @@ export function PipelineSankey({
 
   return (
     <section id="pipeline-sankey" className="mt-10 scroll-mt-8" aria-labelledby="sankey-heading">
-      <h2 id="sankey-heading" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+      <h2 id="sankey-heading" className="text-xs font-semibold text-muted">
         Pipeline Sankey
       </h2>
       <p className="mt-2 max-w-2xl text-sm text-muted">

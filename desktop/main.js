@@ -7,7 +7,7 @@
 // never sees or stores credentials.
 "use strict";
 
-const { app, BrowserWindow, dialog, shell, Menu } = require("electron");
+const { app, BrowserWindow, dialog, shell, Menu, nativeTheme } = require("electron");
 const { spawn, execFileSync } = require("node:child_process");
 const fs = require("node:fs");
 const http = require("node:http");
@@ -173,7 +173,7 @@ async function boot() {
     resizable: false,
     title: APP_NAME,
     show: false,
-    backgroundColor: "#f7f6f3",
+    backgroundColor: nativeTheme.shouldUseDarkColors ? "#121213" : "#f5f5f7",
     webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true },
   });
   splash.loadFile(path.join(__dirname, "splash.html"));
@@ -351,6 +351,10 @@ function appUrl(route = "/sheet") {
   return `http://127.0.0.1:${port}${route}`;
 }
 
+function windowBackground() {
+  return nativeTheme.shouldUseDarkColors ? "#121213" : "#f5f5f7";
+}
+
 function createMainWindow() {
   win = new BrowserWindow({
     width: 1440,
@@ -359,9 +363,18 @@ function createMainWindow() {
     minHeight: 600,
     title: APP_NAME,
     show: false,
-    backgroundColor: "#f7f6f3",
+    // Native Mac chrome: no title bar, traffic lights inset into the glass
+    // sidebar. The page adds the drag strip and the room for them when it sees
+    // the bo-desktop class.
+    titleBarStyle: "hiddenInset",
+    trafficLightPosition: { x: 22, y: 22 },
+    backgroundColor: windowBackground(),
     webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true },
   });
+  win.webContents.on("dom-ready", () => {
+    win.webContents.executeJavaScript("document.documentElement.classList.add('bo-desktop')").catch(() => {});
+  });
+  nativeTheme.on("updated", () => win && !win.isDestroyed() && win.setBackgroundColor(windowBackground()));
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (H.isAppUrl(url, port)) return { action: "allow" };
     if (H.isExternalWebUrl(url)) shell.openExternal(url);

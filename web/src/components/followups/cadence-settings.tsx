@@ -114,7 +114,7 @@ export function CadenceSettings() {
 
   return (
     <div>
-      <label className="mt-8 mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+      <label className="mt-8 mb-2 block text-xs font-semibold text-muted">
         Follow-up cadence
       </label>
       <div className="rounded-xl border border-border bg-surface/50 p-4">

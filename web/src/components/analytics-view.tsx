@@ -37,7 +37,7 @@ export function AnalyticsShell({ total, view, children }: {
     <PageFrame>
       <header className="flex flex-col gap-5 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">Operations / Analytics</p>
+          <p className="text-[11px] font-semibold text-brand">Operations / Analytics</p>
           <h1 className="mt-2 font-display text-3xl tracking-tight text-landing sm:text-4xl">Search intelligence</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
             A read on the roles you are pursuing, the funnel they move through, and the patterns worth acting on.
@@ -173,7 +173,7 @@ export function StatsPanel({ metrics, insights }: { metrics: StatsMetrics; insig
             <PayStat label="Data points" value={metrics.pay.count} />
             <PayStat label="Posted / est." value={`${metrics.pay.postedCount} / ${metrics.pay.estimatedCount}`} />
           </div>
-          <div className="mt-6 border-t border-border pt-5"><p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Salary band distribution</p><div className="mt-4 space-y-3">{metrics.payHistogram.map((row, index) => <BarRow key={row.label} label={row.label} count={row.count} pct={row.pct} widthPct={row.pct} tone={BAR_TONES[index]} />)}</div></div>
+          <div className="mt-6 border-t border-border pt-5"><p className="text-[11px] font-semibold text-muted">Salary band distribution</p><div className="mt-4 space-y-3">{metrics.payHistogram.map((row, index) => <BarRow key={row.label} label={row.label} count={row.count} pct={row.pct} widthPct={row.pct} tone={BAR_TONES[index]} />)}</div></div>
         </> : <EmptyData label="No USD compensation data" detail="Pay appears when tracker notes contain a USD-denominated posted or estimated range." />}
       </Panel>
     </div>
@@ -181,11 +181,11 @@ export function StatsPanel({ metrics, insights }: { metrics: StatsMetrics; insig
 }
 
 function Panel({ eyebrow, title, description, icon, children }: { eyebrow: string; title: string; description?: string; icon?: React.ReactNode; children: React.ReactNode }) {
-  return <section className="rounded-2xl border border-border bg-surface/55 p-4 sm:p-5"><div className="flex items-start justify-between gap-4"><div><p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.17em] text-brand">{icon}{eyebrow}</p><h2 className="mt-2 font-display text-xl tracking-tight text-landing">{title}</h2>{description && <p className="mt-1 max-w-xl text-xs leading-5 text-muted">{description}</p>}</div></div>{children}</section>;
+  return <section className="rounded-2xl border border-border bg-surface/55 p-4 sm:p-5"><div className="flex items-start justify-between gap-4"><div><p className="flex items-center gap-2 text-[11px] font-semibold text-brand">{icon}{eyebrow}</p><h2 className="mt-2 font-display text-xl tracking-tight text-landing">{title}</h2>{description && <p className="mt-1 max-w-xl text-xs leading-5 text-muted">{description}</p>}</div></div>{children}</section>;
 }
 
 function MetricCard({ label, value, icon }: { label: string; value: string | number; icon: React.ReactNode }) {
-  return <div className="rounded-xl border border-border bg-surface/45 p-4"><div className="flex items-center justify-between text-brand"><span className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-muted">{label}</span>{icon}</div><div className="mt-3 font-display text-3xl tracking-tight text-landing tabular-nums">{value}</div></div>;
+  return <div className="rounded-xl border border-border bg-surface/45 p-4"><div className="flex items-center justify-between text-brand"><span className="text-[10px] font-semibold text-muted">{label}</span>{icon}</div><div className="mt-3 font-display text-3xl tracking-tight text-landing tabular-nums">{value}</div></div>;
 }
 
 function RateRow({ label, value }: { label: string; value: number | null }) {

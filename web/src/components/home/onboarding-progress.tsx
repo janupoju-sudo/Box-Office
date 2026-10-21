@@ -85,7 +85,7 @@ export function OnboardingProgress({ compact = false }: { compact?: boolean }) {
         {PREREQS.map((p) => (
           <Row key={p.key} state={missing.has(p.key) ? "missing" : "filled"} label={p.label} />
         ))}
-        <li className="pt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">personalization — what evaluations score against</li>
+        <li className="pt-2 text-[11px] font-semibold text-faint">Personalization: what evaluations score against</li>
         {sections.map((s) => (
           <Row key={s.id} state={s.state} label={s.heading.replace(/^## Your /, "")} />
         ))}

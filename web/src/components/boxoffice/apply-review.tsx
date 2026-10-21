@@ -102,14 +102,14 @@ export function ApplyReview(p: Props) {
   };
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-4">
+    <div className="mx-auto w-full max-w-4xl space-y-4 px-5 pb-12 pt-4 md:px-6">
       <Link href="/sheet" className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground">
         <ArrowLeft className="size-4" /> Job Sheet
       </Link>
 
-      <header className="space-y-2">
-        <p className="text-xs uppercase tracking-wide text-faint">{p.company}</p>
-        <h1 className="font-display text-3xl text-foreground">{p.role}</h1>
+      <header className="glass space-y-2 rounded-[18px] px-6 py-5">
+        <p className="text-xs text-muted">{p.company}</p>
+        <h1 className="bo-display text-[28px] leading-tight text-foreground">{p.role}</h1>
         <div className="flex flex-wrap items-center gap-1.5 text-sm text-muted">
           {p.score != null && <Badge tone={scoreTone(p.score) as "good"}>Fit {p.score.toFixed(1)}/5</Badge>}
           {sponsor && sponsor.installed && <Badge tone={sponsorBadge(sponsor.tier).tone as "good"}>Sponsorship: {sponsorBadge(sponsor.tier).label}</Badge>}
@@ -126,7 +126,7 @@ export function ApplyReview(p: Props) {
       </header>
 
       {(below || sponsorWeak) && (
-        <div className="space-y-1 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-800 dark:text-amber-300">
+        <div className="space-y-1 rounded-[14px] border border-amber-500/40 bg-amber-500/10 p-4 text-sm text-amber-800 dark:text-amber-300">
           {below && (
             <p className="flex gap-2">
               <TriangleAlert className="mt-0.5 size-4 shrink-0" /> This scored below 4.0, career-ops&apos; apply line. Read the evaluation before spending an application on it.
@@ -150,7 +150,7 @@ export function ApplyReview(p: Props) {
           <iframe
             title="Tailored CV preview"
             src={`/api/cv-pdf?n=${encodeURIComponent(p.n)}&company=${encodeURIComponent(p.company)}`}
-            className="h-[560px] w-full rounded-md border border-border bg-white"
+            className="h-[560px] w-full rounded-[10px] border border-border bg-white"
           />
         )}
       </Step>
@@ -160,7 +160,7 @@ export function ApplyReview(p: Props) {
           <iframe
             title="Cover letter preview"
             src={`/api/cv-pdf?n=${encodeURIComponent(p.n)}&kind=cover`}
-            className="h-[480px] w-full rounded-md border border-border bg-white"
+            className="h-[480px] w-full rounded-[10px] border border-border bg-white"
           />
         ) : (
           <>
@@ -178,7 +178,7 @@ export function ApplyReview(p: Props) {
               onChange={(e) => setCoverText(e.target.value)}
               rows={8}
               placeholder="Paste your final cover letter here to save it with this application (optional)."
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-faint focus:border-brand/50 focus:outline-none"
+              className="w-full rounded-[10px] border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-faint focus:border-brand/50 focus:outline-none"
             />
           </>
         )}
@@ -191,7 +191,7 @@ export function ApplyReview(p: Props) {
         <button
           onClick={saveDocs}
           disabled={save.busy || (!cvReady && !coverText.trim() && !p.coverPdfReady)}
-          className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:bg-surface-hover disabled:opacity-50 max-sm:min-h-[44px]"
+          className="inline-flex items-center gap-1.5 min-h-[32px] rounded-full border border-border bg-surface-hover px-4 text-[13px] font-medium text-foreground hover:border-foreground/25 disabled:opacity-50 max-sm:min-h-[44px]"
         >
           {save.busy ? <Loader2 className="size-4 animate-spin" /> : <FolderDown className="size-4" />} Save copies
         </button>
@@ -218,7 +218,7 @@ export function ApplyReview(p: Props) {
             <button
               onClick={markApplied}
               disabled={marking.busy}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:bg-surface-hover disabled:opacity-50 max-sm:min-h-[44px]"
+              className="inline-flex items-center gap-1.5 min-h-[32px] rounded-full border border-border bg-surface-hover px-4 text-[13px] font-medium text-foreground hover:border-foreground/25 disabled:opacity-50 max-sm:min-h-[44px]"
             >
               {marking.busy ? <Loader2 className="size-4 animate-spin" /> : <CheckCircle2 className="size-4" />} I submitted it: mark as Applied
             </button>
@@ -232,7 +232,7 @@ export function ApplyReview(p: Props) {
 
 function Step({ num, title, done, children }: { num: number; title: string; done: boolean; children: React.ReactNode }) {
   return (
-    <section className="space-y-3 rounded-lg border border-border bg-surface p-4">
+    <section className="space-y-3 rounded-[14px] border border-border bg-surface p-5 shadow-[0_10px_40px_var(--glass-shadow)]">
       <h2 className="flex items-center gap-2 text-base font-semibold text-foreground">
         <span
           className={`inline-flex size-6 items-center justify-center rounded-full text-xs tabular-nums ${

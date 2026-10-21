@@ -17,7 +17,7 @@ import { FirstScoreView } from "@/components/explore/first-score-view";
 import { BetaBanner } from "@/components/beta/beta-banner";
 import { WorkerPills } from "@/components/jobs/worker-pills";
 import { UsageMeter } from "@/components/usage-meter";
-import { instrumentSerif } from "@/lib/fonts";
+import { HeroGlow } from "@/components/hero-glow";
 import { visibleNavItems, isActivePath } from "@/lib/nav-items";
 
 export function AppShell({ children, followupsEnabled }: { children: React.ReactNode; followupsEnabled: boolean }) {
@@ -27,19 +27,24 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
       <PipelineProvider>
       <ApplyProvider>
       <ExploreProvider>
+      <div aria-hidden className="bo-drag-strip" />
+      {/* The glow sits behind the whole window so the glass layers (sidebar,
+          toolbars, the Today card) have something to refract. */}
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[600px]">
+        <HeroGlow />
+      </div>
       <MobileNav followupsEnabled={followupsEnabled} />
-      <div className="flex min-h-screen">
-        <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-border bg-surface/30 p-4 md:flex">
-          <Link href="/" className="mb-8 flex items-center gap-2.5 px-1">
-            <AppMark size={32} />
+      <div className="relative z-10 flex min-h-screen">
+        <aside className="sticky top-0 hidden h-screen w-60 shrink-0 p-2.5 md:flex">
+          <div className="bo-sidebar-card glass flex w-full flex-col overflow-y-auto rounded-[18px] p-2.5">
+          <Link href="/" className="mb-6 flex items-center gap-2.5 px-2 py-1">
+            <AppMark size={28} />
             <span className="flex min-w-0 flex-col">
-              <span className={`${instrumentSerif.className} relative -top-px text-2xl font-normal leading-none tracking-tight text-landing`}>
-                {APP_NAME}
-              </span>
-              <span className="mt-1 text-[11px] leading-none text-faint">{APP_TAGLINE}</span>
+              <span className="text-[13px] font-semibold leading-tight text-foreground">{APP_NAME}</span>
+              <span className="text-[11px] leading-tight text-muted">{APP_TAGLINE}</span>
             </span>
           </Link>
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-0.5">
             {visibleNavItems(followupsEnabled).map(({ href, label, icon: Icon, chip }) => {
               const active = isActivePath(href, pathname);
               return (
@@ -47,16 +52,16 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
                   key={href}
                   href={href}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                    "flex min-h-[32px] items-center gap-2.5 rounded-[10px] px-2.5 text-[13px] transition-colors",
                     active
-                      ? "bg-brand-soft text-brand-text"
-                      : "text-muted hover:bg-surface-hover hover:text-foreground",
+                      ? "glass-selected font-medium text-foreground"
+                      : "glass-hover text-foreground/85",
                   )}
                 >
-                  <Icon className="size-4" />
+                  <Icon className={cn("size-4", active ? "text-brand-text" : "text-muted")} />
                   {label}
                   {chip && (
-                    <span className="ml-auto rounded-full border border-brand/30 bg-brand-soft px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-brand-text">
+                    <span className="ml-auto rounded-full bg-brand-soft px-1.5 py-0.5 text-[10px] font-semibold text-brand-text">
                       {chip}
                     </span>
                   )}
@@ -70,18 +75,18 @@ export function AppShell({ children, followupsEnabled }: { children: React.React
           <div className="mt-auto space-y-3 pb-16 pt-4">
             <UsageMeter />
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between px-1">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-faint">Appearance</span>
-                <span className="font-mono text-[10px] text-faint">THEME</span>
+              <div className="px-1">
+                <span className="text-[11px] font-semibold text-muted">Appearance</span>
               </div>
               <ThemeToggle showLabel />
               <div className="px-1">
-                <span className={`${instrumentSerif.className} text-sm text-faint`}>local-first · v0</span>
+                <span className="text-[11px] text-faint">Runs on this Mac · built on career-ops</span>
               </div>
             </div>
           </div>
+          </div>
         </aside>
-        <main className="flex-1 overflow-x-hidden">{children}</main>
+        <main className="min-w-0 flex-1 overflow-x-hidden">{children}</main>
         <AssistantConsole />
         <BackToTop />
         <FirstScoreView />

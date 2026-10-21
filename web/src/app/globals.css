@@ -6,19 +6,19 @@
    (mode-invariant), zinc neutrals, light + dark (Fumadocs neutral values).
    ────────────────────────────────────────────────────────────────────────── */
 @theme {
-  --color-brand: hsl(26 73% 51%);
-  --color-brand-200: hsl(33 100% 60%); /* hover / lighter */
-  /* Near-black on the brand orange: 5.2:1 on brand, 8.3:1 on brand-200 hover
-     (white was 3.14:1, an AA fail in BOTH themes since the button is the same).
-     The brand orange itself is untouched — only what sits on top of it. */
-  --color-brand-foreground: hsl(24 30% 12%);
-  --color-brand-soft: hsl(26 73% 51% / 0.12);
+  /* Box Office: macOS system orange as the accent (mode-invariant). Near-black
+     text on it: ~10:1. */
+  --color-brand: #ff9f0a;
+  --color-brand-200: #ffb340; /* hover / lighter */
+  --color-brand-foreground: #1d1206;
+  --color-brand-soft: rgb(255 159 10 / 0.14);
   --color-brand-secondary: #fc7744;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  /* The Mac's own typefaces. Nothing is downloaded. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
 }
 
 /* Semantic surfaces reference runtime vars so they swap with the theme class. */
@@ -30,41 +30,57 @@
   --color-foreground: var(--fg);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
-  --color-landing: var(--landing); /* editorial olive (light) / cream (dark) — docs landing-foreground */
-  /* Brand as SMALL TEXT: the raw orange only passes AA in dark (4.95); in light
-     it's 2.6-3.1 on cream/white. brand-text darkens it for light and keeps the
-     raw brand in dark. Use for small text/badges; brand stays for accents,
-     surfaces, icons and large headings (≥24px passes at 3:1). */
+  --color-landing: var(--landing);
+  /* Brand as SMALL TEXT: the raw orange fails AA on light surfaces, so light
+     mode uses a darker shade; dark mode uses a lighter one. */
   --color-brand-text: var(--brand-text);
 }
 
+/* Light: macOS light appearance. Contrast checked against --surface and
+   --surface-hover (muted/faint/brand-text all >= 4.5:1). */
 :root {
-  --bg: #f7f6f3; /* warm off-white (docs stone tone) */
+  --bg: #f5f5f7;
   --surface: #ffffff;
-  --surface-hover: #efeeea;
-  --border: hsl(40 9% 86%);
-  --fg: hsl(30 10% 11%); /* warm near-black, high legibility */
-  --muted: hsl(35 9% 34%); /* darker than before for readable body text */
-  --faint: hsl(35 7% 42%); /* AA: ~4.6:1 on #fff (was 50% ≈ 3.9:1, failed small text) */
-  --landing: #59592a; /* olive editorial headline */
-  --brand-text: hsl(26 80% 36%); /* darkened brand for small text: 5.5 white / 5.1 cream / 4.7 surface-hover */
-  --dot: 40 8% 42% / 0.09;
-  --pre-bg: #f2f1ed;
+  --surface-hover: #ececf0;
+  --border: #d9d9de;
+  --fg: #1d1d1f;
+  --muted: #5e5e63;
+  --faint: #6a6a70;
+  --landing: #1d1d1f;
+  --brand-text: #a14a00;
+  --dot: 240 4% 42% / 0.09;
+  --pre-bg: #f0f0f3;
+  --zebra: #f7f7f9;
+  /* Glass: floating controls over the glow (sidebar, toolbar, Today card). */
+  --glass-bg: rgb(255 255 255 / 0.58);
+  --glass-border: rgb(0 0 0 / 0.08);
+  --glass-highlight: rgb(255 255 255 / 0.85);
+  --glass-shadow: rgb(0 0 0 / 0.08);
+  --glass-selected: rgb(0 0 0 / 0.07);
+  --glass-hover: rgb(0 0 0 / 0.045);
   color-scheme: light;
 }
 
+/* Dark: macOS dark appearance. */
 .dark {
-  --bg: #0a0a0a;
-  --surface: #161616;
-  --surface-hover: #232323;
-  --border: #262626;
-  --fg: #fafafa;
-  --muted: #a1a1aa;
-  --faint: #8b8b95; /* AA: ~4.6:1 on #161616 (was #71717a ≈ 3.7:1, failed small text) */
-  --landing: #e4e2d0; /* cream editorial headline */
-  --brand-text: hsl(26 73% 51%); /* raw brand already passes in dark (≥4.95 on bg/surface) */
+  --bg: #121213;
+  --surface: #1c1c1e;
+  --surface-hover: #2c2c2e;
+  --border: #343437;
+  --fg: #f5f5f7;
+  --muted: #a1a1a6;
+  --faint: #98989d;
+  --landing: #f5f5f7;
+  --brand-text: #ffb340;
   --dot: 240 5% 65% / 0.10;
-  --pre-bg: #111111;
+  --pre-bg: #161618;
+  --zebra: #212123;
+  --glass-bg: rgb(40 40 44 / 0.42);
+  --glass-border: rgb(255 255 255 / 0.14);
+  --glass-highlight: rgb(255 255 255 / 0.20);
+  --glass-shadow: rgb(0 0 0 / 0.40);
+  --glass-selected: rgb(255 255 255 / 0.16);
+  --glass-hover: rgb(255 255 255 / 0.07);
   color-scheme: dark;
 }
 
@@ -79,8 +95,37 @@ html {
 }
 
 @layer utilities {
+  /* Page titles: SF Pro Display, bold, tight (native Mac large titles). */
+  .bo-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+  }
+  /* Liquid-glass surfaces for the NAVIGATION layer only (sidebar, toolbar
+     controls, the Today card). Content (tables, reports, forms) stays solid. */
+  .glass {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 10px 40px var(--glass-shadow);
+  }
+  .glass-control {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 6px 20px var(--glass-shadow);
+  }
+  .glass-selected {
+    background: var(--glass-selected);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+  }
+  .glass-hover:hover {
+    background: var(--glass-hover);
+  }
   .font-serif-italic {
-    font-family: var(--font-instrument-serif-italic), var(--font-serif);
+    font-family: var(--font-serif);
     font-style: italic;
   }
   /* Ambient dot grid — adapts to the theme via --dot. Pure CSS, 0 DOM. */
@@ -180,6 +225,29 @@ html {
   opacity: 0;
   transform: scaleX(0);
 }
+
+/* People who turn on Reduce transparency get solid surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass-control {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Desktop app (Box Office.app): the window has inset traffic lights and no
+   title bar, so leave room for them and make the top strip drag the window. */
+.bo-drag-strip { display: none; }
+html.bo-desktop .bo-drag-strip {
+  display: block;
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 28px;
+  z-index: 60;
+  -webkit-app-region: drag;
+}
+html.bo-desktop .bo-sidebar-card { padding-top: 44px; }
+html.bo-desktop main { padding-top: 16px; }
 
 @media (prefers-reduced-motion: reduce) {
   .cli-cursor,
@@ -323,3 +391,10 @@ html.dark .co-cost[data-tone="free"]{color:hsl(158 64% 60%);background:hsl(158 6
 .co-cost[data-tone="spend"]{color:hsl(35 9% 34%);background:hsl(35 8% 46% / .12);border-color:hsl(35 8% 46% / .26)}
 html.dark .co-cost[data-tone="spend"]{color:hsl(35 8% 70%);background:hsl(35 6% 60% / .12);border-color:hsl(35 6% 60% / .24)}
 .co-cost svg{width:.85em;height:.85em}
+
+/* Box Office: the system orange is too light for small text on light surfaces
+   (~2.2:1). In light mode, small orange text uses the AA-passing shade. Fills
+   (bg-brand) and dark mode keep the raw orange. */
+:root:not(.dark) .text-brand {
+  color: var(--brand-text);
+}

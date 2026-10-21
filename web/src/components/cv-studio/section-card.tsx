@@ -43,7 +43,7 @@ export function SectionCard({ section, siblings, first, last, ...common }: Commo
   return (
     <section aria-label={section.title} className={cn("rounded-2xl border border-border bg-surface/40 px-4 py-3 transition-opacity", isHidden && "opacity-50")}>
       <header className="flex items-center gap-1">
-        <h2 className="flex-1 font-mono text-xs uppercase tracking-[0.16em] text-faint">{section.title || "Section"}</h2>
+        <h2 className="flex-1 text-xs font-semibold text-faint">{section.title || "Section"}</h2>
         <MoveButtons parent="root" id={section.id} siblings={siblings} first={first} last={last} dispatch={dispatch} label={`${section.title} section`} />
         <HideButton id={section.id} hidden={isHidden} dispatch={dispatch} label={`${section.title} section`} />
       </header>

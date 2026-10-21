@@ -19,8 +19,8 @@ export function FirstRunHome() {
             clears WCAG AA contrast instead of washing out over a bright corner. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-surface/55 backdrop-blur-[2px] dark:bg-background/45" />
         <div className="relative z-10">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            <span className="text-faint">//</span> local-first · your machine
+          <p className="text-xs font-semibold text-muted">
+            Runs on your Mac · nothing leaves it
           </p>
           <h1 className={`${instrumentSerif.className} mt-3 text-4xl leading-[1.05] text-landing md:text-5xl`}>
             Drop your CV. See who&apos;s hiring you in 60 seconds.

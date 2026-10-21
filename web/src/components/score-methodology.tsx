@@ -38,7 +38,7 @@ export function ScoreMethodology() {
           recommends against applying.
         </p>
         <div>
-          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-faint">The six dimensions</div>
+          <div className="mb-2 text-xs font-semibold text-faint">The six dimensions</div>
           <ul className="space-y-1.5">
             {DIMENSIONS.map(([k, v]) => (
               <li key={k}>
@@ -48,7 +48,7 @@ export function ScoreMethodology() {
           </ul>
         </div>
         <div>
-          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-faint">What each report block means</div>
+          <div className="mb-2 text-xs font-semibold text-faint">What each report block means</div>
           <ul className="space-y-2">
             {BLOCKS.map(([k, v]) => (
               <li key={k} className="flex items-start gap-2.5">

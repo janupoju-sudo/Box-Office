@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Bell, CircleHelp, Sparkles, ArrowRight } from "lucide-react";
 import { instrumentSerif } from "@/lib/fonts";
-import { HeroGlow } from "@/components/hero-glow";
 import type { Application, InboxJob } from "@/lib/career-ops";
 import type { DiscoveredOffer } from "@/lib/explore";
 import { DiscoveryCard } from "@/components/explore/discovery-card";
@@ -146,13 +145,10 @@ export function TodayDashboard({
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10 max-sm:pb-24">
-      <section className="dot-bg relative overflow-hidden rounded-2xl border border-border bg-surface/40 px-7 py-10 md:px-10 md:py-12">
-        <HeroGlow />
-        {/* Readability scrim between the animated glow (z-0) and the copy (z-10). */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-surface/55 backdrop-blur-[2px] dark:bg-background/45" />
+      <section className="glass relative overflow-hidden rounded-[18px] px-7 py-8 md:px-9 md:py-10">
         <div className="relative z-10">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            <span className="text-faint">//</span> today · <span className="tabular-nums">{dateLabel}</span>
+          <p className="text-[13px] font-medium text-muted">
+            Today · <span className="tabular-nums">{dateLabel}</span>
           </p>
           <h1 className={`${instrumentSerif.className} mt-3 text-4xl leading-[1.05] text-landing md:text-5xl`}>
             {heroState === "loading" ? (
@@ -189,7 +185,7 @@ export function TodayDashboard({
               : heroState === "queue-partial"
                 ? `${missingSources} could not be read, so this may be missing work. What loaded is below.`
                 : allClear
-                  ? "I'll keep scanning the market in the background and surface anything that fits."
+                  ? "Nothing needs you right now. Run a scan or paste a job link on the Job Sheet to add more."
                   : followupsEnabled
                     ? "Your action queue for today — discovery and follow-ups, in one place."
                     : "Your action queue for today, in one place."}
@@ -307,7 +303,7 @@ function Section({ icon: Icon, title, hint, children }: { icon: React.ComponentT
     <section className="mt-10">
       <div className="mb-3 flex items-center gap-2">
         <Icon className="size-4 text-brand" />
-        <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">{title}</h2>
+        <h2 className="text-sm font-semibold text-muted">{title}</h2>
         <span className="text-xs text-faint">· {hint}</span>
       </div>
       {children}

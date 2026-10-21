@@ -209,7 +209,7 @@ export function ApplyView() {
 
           {(filling || done) && a.steps.length > 0 && (
             <div className="co-rise mt-6">
-              <div className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-faint">Behind the scenes</div>
+              <div className="mb-2 text-xs font-semibold text-faint">Behind the scenes</div>
               <div className="flex gap-2 overflow-x-auto pb-2">
                 {a.steps.map((s, i) => (
                   <figure key={i} className="shrink-0">

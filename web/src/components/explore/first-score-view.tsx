@@ -123,8 +123,8 @@ export function FirstScoreView() {
         </button>
 
         <div className="relative px-7 pb-7 pt-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
-            <span className="text-faint">//</span> the job we found you — scored
+          <p className="text-[11px] font-semibold text-brand">
+            The job we found you, scored
           </p>
 
           <div className="mt-4 flex items-start gap-4">

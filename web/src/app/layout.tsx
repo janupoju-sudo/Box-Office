@@ -8,11 +8,11 @@ import { readFollowupsEnabled } from "@/lib/followups-server";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "career-ops — official web experience",
-  description: "The official, local-first web experience for career-ops.",
+  title: "applydesk",
+  description: "Local-first job search desk, built on career-ops (MIT).",
   // Home-screen / standalone (iOS): let our theme-color flow up to the status bar
   // + Dynamic Island; safe-area insets handle the layout.
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "career-ops" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "applydesk" },
 };
 
 export const viewport: Viewport = {

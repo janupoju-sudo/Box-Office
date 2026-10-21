@@ -260,7 +260,22 @@ function gitHead() {
   }
 }
 
+// The per-CLI skill links (.claude/skills/…/SKILL.md and friends) are tracked
+// symlinks some copy tools can't write. Restore any that are missing from git.
+function restoreSkillLinks() {
+  const dirs = [".claude", ".qwen", ".kimi", ".grok", ".antigravitycli", ".opencode"];
+  const missing = dirs.filter((d) => exists(path.join(repo, d)) && !exists(path.join(repo, d, "skills", "career-ops", "SKILL.md")));
+  if (!missing.length || !exists(path.join(repo, ".git"))) return;
+  try {
+    execFileSync("git", ["checkout", "--", ...missing.map((d) => `${d}/skills/career-ops/SKILL.md`)], { cwd: repo, env, stdio: "ignore" });
+    log(`Restored skill links in ${missing.join(", ")}`);
+  } catch {
+    // Optional: only matters when an AI CLI is opened inside this folder.
+  }
+}
+
 async function setup() {
+  restoreSkillLinks();
   const web = path.join(repo, "web");
   const headFile = path.join(web, ".next", "box-office-head");
   const head = gitHead();

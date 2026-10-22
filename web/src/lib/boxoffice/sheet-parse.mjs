@@ -1,5 +1,6 @@
 // Box Office: pure helpers for the Job Sheet (plain .mjs so tests can import
 // them directly under Node, like the rest of web/src/lib).
+import { normalizeUrl } from "../core/url-key.mjs";
 
 /**
  * Value of a report header field ("**URL:** …"), "" when absent.
@@ -50,18 +51,25 @@ export function scoreNumber(s) {
 }
 
 /**
- * Comparable form of a posting URL: no protocol, no query/hash, no trailing
- * slash, lowercase host. "" for empty input.
+ * Comparable form of a posting URL: the core's dedup key (core/url-key.mjs).
+ * Tracking params and trailing slashes are dropped, but identity params such
+ * as Greenhouse's `?gh_jid=` are kept, so two openings on one careers page
+ * stay two rows. "" means no key, which never matches another "".
  * @param {string} url
  */
 export function normalizeUrlKey(url) {
-  if (!url) return "";
-  try {
-    const u = new URL(url);
-    return `${u.host.toLowerCase()}${u.pathname.replace(/\/+$/, "")}`;
-  } catch {
-    return String(url).trim().replace(/[?#].*$/, "").replace(/\/+$/, "");
-  }
+  return normalizeUrl(url);
+}
+
+/**
+ * True when two posting URLs are the same posting. Two URLs with no key are
+ * unknown, not equal.
+ * @param {string} a
+ * @param {string} b
+ */
+export function samePosting(a, b) {
+  const x = normalizeUrlKey(a);
+  return x !== "" && x === normalizeUrlKey(b);
 }
 
 /**

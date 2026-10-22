@@ -24,6 +24,8 @@ import { resolveCvTemplate } from "@/lib/core/cv-template.mjs";
 import { acquireTrackerWrite, releaseTrackerWrite } from "@/lib/core/run-registry";
 import { createRunFinalizer } from "@/lib/run-finalizer.mjs";
 import { readJsonObject } from "@/lib/json-body";
+import { resolveCodeRoot } from "@/lib/core/code-root.mjs";
+import { prefetchJd, fenceJd } from "@/lib/boxoffice/prefetch-jd.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -141,9 +143,17 @@ export async function POST(req: Request) {
   // The root is passed, not re-derived: a relative CAREER_OPS_PROFILE resolves
   // against it, and `process.cwd()` here is `<core>/web` (see cv-template.mjs).
   const cvTemplate = kind === "pdf" ? await resolveCvTemplate(careerOpsRoot()) : undefined;
+  // Read the JD from the job board's public API first (no plan usage). When it
+  // works, the AI never has to fetch the posting, so a user's own WebFetch hooks
+  // or a JS-rendered board can't leave it with nothing to score.
+  const jdText = kind === "evaluate"
+    ? await prefetchJd(input, { codeRoot: resolveCodeRoot(process.cwd(), process.env), cwd: careerOpsRoot() })
+    : null;
+  const prefetchedJd = jdText ? fenceJd(jdText) : undefined;
   const prompt = buildPrompt({
     kind,
     input,
+    prefetchedJd,
     memory: readMemory(),
     today,
     postedAt,

@@ -7,6 +7,7 @@ import {
   normalizeUrlKey,
   payFromReport,
   reportFieldValue,
+  samePosting,
   scoreNumber,
   scoreTone,
   splitReport,
@@ -68,9 +69,20 @@ test("splitReport separates the archived JD from the evaluation", () => {
   assert.deepEqual(splitReport("# no jd\n\ntext"), { jd: "", evaluation: "# no jd\n\ntext" });
 });
 
-test("normalizeUrlKey matches the same posting across query strings and slashes", () => {
+test("normalizeUrlKey matches the same posting across tracking params and slashes", () => {
   assert.equal(normalizeUrlKey("https://Jobs.Example.com/a/1/?utm_source=x"), normalizeUrlKey("http://jobs.example.com/a/1"));
   assert.equal(normalizeUrlKey(""), "");
+});
+
+test("normalizeUrlKey keeps two Greenhouse openings on one careers page apart", () => {
+  assert.notEqual(normalizeUrlKey("https://acme.com/careers?gh_jid=111"), normalizeUrlKey("https://acme.com/careers?gh_jid=222"));
+  assert.equal(normalizeUrlKey("https://acme.com/careers?gh_jid=111&gh_src=x"), normalizeUrlKey("https://acme.com/careers?gh_jid=111"));
+});
+
+test("samePosting never matches two URLs that have no key", () => {
+  assert.equal(samePosting("", ""), false);
+  assert.equal(samePosting("not a url", "not a url"), false);
+  assert.equal(samePosting("https://a.com/j/1/", "https://a.com/j/1"), true);
 });
 
 test("statusGroup maps career-ops statuses to sheet tabs", () => {

@@ -41,7 +41,9 @@ export function addOffersToPipeline(offers: DiscoveredOffer[]): Promise<AddResul
   }
 
   const scanUrl = pathToFileURL(rootScript("scan")).href;
-  const localTodayUrl = pathToFileURL(path.join(careerOpsRoot(), "lib", "local-today.mjs")).href;
+  // Code, not data: lib/ sits beside scan.mjs in the checkout. The data root
+  // (careerOpsRoot()) can be a separate folder with no lib/ in it.
+  const localTodayUrl = pathToFileURL(path.join(path.dirname(rootScript("scan")), "lib", "local-today.mjs")).href;
   const code = `
 import { appendToPipeline, appendToScanHistory } from ${JSON.stringify(scanUrl)};
 import { localToday } from ${JSON.stringify(localTodayUrl)};

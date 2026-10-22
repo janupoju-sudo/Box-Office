@@ -12,7 +12,7 @@ import type { SheetRow } from "@/lib/boxoffice/sheet-rows";
 import {
   SPONSOR_RANK,
   STATUS_GROUPS,
-  normalizeUrlKey,
+  samePosting,
   scoreTone,
   sponsorBadge,
   statusGroup,
@@ -98,18 +98,34 @@ export function JobSheet({ rows }: { rows: SheetRow[] }) {
   }, [router]);
 
   // "Apply" on a not-yet-evaluated job: once its evaluation lands as a tracked
-  // row, continue straight to that row's review screen.
+  // row, continue straight to that row's review screen. A run that failed, or
+  // finished without a row we can find, leaves the queue instead of spinning.
   useEffect(() => {
     if (applyQueue.length === 0) return;
     for (const url of applyQueue) {
-      const hit = rows.find((r) => r.kind === "tracked" && r.n && normalizeUrlKey(r.url) === normalizeUrlKey(url));
-      if (hit) {
+      const hit = rows.find((r) => r.kind === "tracked" && r.n && samePosting(r.url, url));
+      // Newest first: jobs are prepended, so this is the run Apply started.
+      const run = jobs.find((j) => j.kind === "evaluate" && j.input === url);
+      const reportN = run?.status === "done" && typeof run.reportN === "number" ? run.reportN : null;
+      const n = hit?.n ?? (reportN != null ? rows.find((r) => r.kind === "tracked" && Number(r.n) === reportN)?.n : null);
+      if (n) {
         setApplyQueue((q) => q.filter((u) => u !== url));
-        router.push(`/sheet/${encodeURIComponent(hit.n!)}/apply`);
+        router.push(`/sheet/${encodeURIComponent(n)}/apply`);
+        return;
+      }
+      if (run?.status === "error") {
+        setApplyQueue((q) => q.filter((u) => u !== url));
+        setNotice(`Scoring failed: ${run.steps[run.steps.length - 1]?.label ?? "the run stopped"}. Open its log from the sidebar.`);
+        return;
+      }
+      // Done, and the refreshed rows still have no match: stop waiting.
+      if (run?.status === "done" && !rows.some((r) => r.kind === "new" && r.url === url)) {
+        setApplyQueue((q) => q.filter((u) => u !== url));
+        setNotice("Scored. Find the job in the sheet and press Apply.");
         return;
       }
     }
-  }, [rows, applyQueue, router]);
+  }, [rows, jobs, applyQueue, router]);
 
   const evaluating = useCallback(
     (url: string) => jobs.some((j) => j.kind === "evaluate" && j.input === url && j.status === "running"),
@@ -488,7 +504,7 @@ function AddJob({ existing, onAdded, onMessage }: { existing: string[]; onAdded:
       onMessage("Paste a full job link starting with https://");
       return;
     }
-    if (existing.some((x) => normalizeUrlKey(x) === normalizeUrlKey(u))) {
+    if (existing.some((x) => samePosting(x, u))) {
       onMessage("That job is already in your sheet.");
       return;
     }

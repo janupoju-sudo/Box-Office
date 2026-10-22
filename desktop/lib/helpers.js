@@ -2,7 +2,8 @@
 // tested under plain Node.
 "use strict";
 
-const path = require("node:path");
+// POSIX on purpose: these are macOS paths, whatever OS runs the tests.
+const path = require("node:path").posix;
 
 const PATH_MARK = "__BOX_OFFICE_PATH__";
 

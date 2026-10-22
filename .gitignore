@@ -285,3 +285,8 @@ web/out/
 # Box Office desktop app build output
 /desktop/node_modules/
 /desktop/dist/
+
+# Box Office keeps your data in this folder: generated CVs and cover letters,
+# and the scanner's list of companies to review. Never commit them.
+/Applications/
+/companies-to-add.yml

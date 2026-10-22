@@ -156,7 +156,7 @@ export function DiscoveryCard({ offer, inPipeline, evaluatedN }: { offer: Discov
             <button
               type="button"
               onClick={evaluate}
-              title={unverified ? "Runs a real evaluation — and verifies the posting is live. Uses tokens." : "Runs a real A–F evaluation. Uses tokens."}
+              title={unverified ? "Runs a real evaluation and checks the posting is still live. Counts toward your Claude plan usage." : "Runs a real A–F evaluation. Counts toward your Claude plan usage."}
               className="inline-flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-brand/30 px-2.5 py-2 text-xs font-medium text-brand transition-colors hover:bg-brand-soft max-sm:min-h-[44px]"
             >
               Evaluate <Coins className="size-3.5 opacity-80" />

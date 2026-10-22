@@ -272,7 +272,7 @@ export function TodayDashboard({
 
       {/* C. Fresh matches this week (supply loop) */}
       {!freshError && fresh.length > 0 && (
-        <Section icon={Sparkles} title="Fresh matches this week" hint="Found by your free scans · 0 tokens">
+        <Section icon={Sparkles} title="Fresh matches this week" hint="Found by your free scans · no Claude usage">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {fresh.slice(0, 6).map((o) => (
               <DiscoveryCard key={o.url} offer={o} inPipeline={inboxUrls.has(o.url)} />

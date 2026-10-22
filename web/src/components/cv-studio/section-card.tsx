@@ -271,7 +271,7 @@ function RewritePanel({ n, bullet, current, onUse }: { n: string; bullet: Studio
           </button>
         ))}
       </div>
-      {proposal.kind === "running" && <p className="mt-2 text-xs text-muted">Your AI CLI is drafting a rewrite. This uses tokens and can take a minute.</p>}
+      {proposal.kind === "running" && <p className="mt-2 text-xs text-muted">Your Claude Code is drafting a rewrite. This counts toward your Claude plan usage and can take a minute.</p>}
       {proposal.kind === "failed" && <p role="alert" className="mt-2 text-xs text-red-700 dark:text-red-300">{proposal.error}</p>}
       {proposal.kind === "ready" && (
         <div className="mt-2 rounded-md border border-border bg-background p-2 text-sm">

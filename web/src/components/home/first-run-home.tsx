@@ -30,8 +30,8 @@ export function FirstRunHome() {
             <a href="/config" className="text-foreground underline-offset-2 hover:underline">
               Config
             </a>{" "}
-            first. The market scan is <span className="text-foreground">free</span>. You only spend tokens when you
-            choose to score a role.
+            first. The market scan is <span className="text-foreground">free</span>. Only scoring a role counts toward your
+            Claude plan usage.
           </p>
           <div className="mt-7">
             <CvIngest />

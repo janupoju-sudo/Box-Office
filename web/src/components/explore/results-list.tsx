@@ -41,7 +41,7 @@ export function ResultsList({ offers }: { offers: EnrichedOffer[] }) {
           <p className="text-[12px] text-faint">
             {isAi
               ? "found by AI on the open web · unverified until you evaluate"
-              : employer ? "From selected employer sites · check the original JD · 0 tokens spent" : `${companiesScanned > 0 ? `${companiesScanned.toLocaleString()} companies scanned · ` : ""}0 tokens spent${partial ? " · some boards were unreachable (normal for public directories)" : ""}`}
+              : employer ? "From selected employer sites · check the original JD · no Claude usage" : `${companiesScanned > 0 ? `${companiesScanned.toLocaleString()} companies scanned · ` : ""}no Claude usage${partial ? " · some boards were unreachable (normal for public directories)" : ""}`}
           </p>
           {!isAi && error && <p className="text-[12px] text-amber-700 dark:text-amber-300">{error}</p>}
         </div>

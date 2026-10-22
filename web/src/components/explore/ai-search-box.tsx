@@ -74,7 +74,7 @@ export function AiSearchBox({
           <span className="text-[12px] text-muted">
             {cliConfigured ? (
               <>
-                Reads the public web with <span className="text-foreground">{cliName || "your CLI"}</span> — it costs your tokens.
+                Reads the public web with <span className="text-foreground">{cliName || "your CLI"}</span>, so it counts toward your plan usage.
               </>
             ) : (
               "Connect an AI CLI in Config to use AI search."

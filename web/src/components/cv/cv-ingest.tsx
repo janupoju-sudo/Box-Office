@@ -256,7 +256,7 @@ export function CvIngest({ onSaved }: { onSaved?: () => void }) {
           <span className={`${instrumentSerif.className} text-lg text-foreground`}>{trace || "Reading your CV…"}</span>
         </div>
         <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-          <span className="size-1.5 rounded-full bg-emerald-500" /> 0 tokens · $0.00 · local
+          <span className="size-1.5 rounded-full bg-emerald-500" /> No Claude usage · read on this Mac
         </div>
         {md && <div className="co-cvtrace mt-4 max-h-40 overflow-hidden rounded-lg border border-border bg-surface/40 p-3 text-[11px] text-faint">{md.slice(0, 400)}…</div>}
       </div>

@@ -218,9 +218,9 @@ export function JobSheet({ rows }: { rows: SheetRow[] }) {
           ? "Nothing waiting on you."
           : "No jobs yet.";
   const subline = scoring
-    ? `Scoring with your Claude Code, ${MAX_PARALLEL_SCORES} at a time. ${scoringLeft} left.`
+    ? `Scoring with your Claude Code, ${MAX_PARALLEL_SCORES} at a time. ${scoringLeft} left. Counts toward your Claude plan usage.`
     : newRows.length > 0
-      ? "Scoring runs on your Claude Code login and uses tokens."
+      ? "Scoring counts toward your Claude plan usage. Check the Usage bars in the sidebar."
       : "Paste a job link or run a scan to add more.";
 
   return (
@@ -471,7 +471,7 @@ function ApplyCell({
     <button
       onClick={() => onEvaluate(row, true)}
       className="inline-flex min-h-[28px] items-center gap-1.5 rounded-full border border-border bg-surface-hover px-3.5 text-xs font-medium text-foreground transition-colors hover:border-foreground/25 max-sm:min-h-[44px]"
-      title="Scores the job with your Claude first (uses tokens), then opens the review screen"
+      title="Scores the job with your Claude Code first (counts toward your Claude plan usage), then opens the review screen"
     >
       <Send className="size-3" aria-hidden /> Apply
     </button>

@@ -139,7 +139,7 @@ export function ExplorerView({
           <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted">
             {isAi
               ? "Describe the role in plain language — an AI hunts the open web for it, on your own AI. Candidates are unverified until you evaluate."
-              : employer ? "Scan selected employer sites using your role and location terms, zero tokens. Open an original JD to check its details." : "Scan the public ATS network — Greenhouse, Lever, Ashby, Workday. Fresh postings matched to you, zero tokens. You only spend when you choose to evaluate one."}
+              : employer ? "Scan selected employer sites using your role and location terms, with no Claude usage. Open an original JD to check its details." : "Scan the public ATS network — Greenhouse, Lever, Ashby, Workday. Fresh postings matched to you, with no Claude usage. Only scoring a job counts toward your plan."}
           </p>
         )}
       </header>

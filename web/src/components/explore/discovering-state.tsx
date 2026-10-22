@@ -81,7 +81,7 @@ export function DiscoveringState() {
 
         <div className="co-ledger">
           <span className="size-1.5 rounded-full bg-emerald-500" />
-          0 tokens · $0.00 {companies > 0 && <span className="opacity-70">· {companies.toLocaleString()} companies</span>}
+          No Claude usage {companies > 0 && <span className="opacity-70">· {companies.toLocaleString()} companies</span>}
         </div>
 
         <div>

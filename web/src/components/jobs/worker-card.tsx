@@ -150,7 +150,7 @@ export function WorkerCard({
       )}
       {tokens > 0 && (
         <div className={cn("mt-1 text-faint tabular-nums", inline ? "text-xs" : "text-[10px]")}>
-          {fmtTokens(tokens)} tokens{job.cost?.usd != null ? ` · $${job.cost.usd.toFixed(2)}` : ""}
+          {fmtTokens(tokens)} tokens of plan usage{job.cost?.usd != null ? ` · ≈$${job.cost.usd.toFixed(2)} at API rates` : ""}
         </div>
       )}
     </div>

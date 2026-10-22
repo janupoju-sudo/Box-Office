@@ -5,8 +5,8 @@
 
 const HINTS = [
   {
-    test: /not logged in|please run \/login|\/login|unauthori[sz]ed|\b401\b|authentication|invalid api key|oauth token|credentials/i,
-    hint: "Claude Code isn't signed in for Box Office. Open Terminal, run `claude`, and type /login. Then try again.",
+    test: /not logged in|please run \/login|\/login|unauthori[sz]ed|\b401\b|authenticat|invalid api key|oauth|session expired|token expired|credentials/i,
+    hint: "Claude Code isn't signed in, or its sign-in expired. Open Terminal, run `claude`, and type /login. Then try again.",
   },
   {
     test: /usage limit|limit reached|rate limit|\b429\b|quota|resets? (at|in)/i,
@@ -32,10 +32,6 @@ export function tail(text, max = 600) {
   return s.length > max ? `…${s.slice(-max)}` : s;
 }
 
-/**
- * @param {{ error?: string | null, stderr?: string, code?: number | null, cliName?: string }} info
- * @returns {string} Markdown shown in place of the reply.
- */
 /** "Claude AI usage limit reached|1792680000" → "… (resets Oct 22, 2:40 AM)". */
 export function readableReset(text) {
   return String(text || "").replace(/\|(\d{10})\b/, (_m, secs) => {
@@ -45,6 +41,10 @@ export function readableReset(text) {
   });
 }
 
+/**
+ * @param {{ error?: string | null, stderr?: string, code?: number | null, cliName?: string }} info
+ * @returns {string} Markdown shown in place of the reply.
+ */
 export function explainCliFailure({ error = null, stderr = "", code = null, cliName = "Claude Code" } = {}) {
   const reason = readableReset(String(error || "").trim() || tail(stderr));
   if (!reason) {

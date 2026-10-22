@@ -10,6 +10,12 @@ test("not signed in points to /login", () => {
   assert.match(m, /type \/login/);
 });
 
+test("an expired OAuth session points to /login", () => {
+  const m = explainCliFailure({ stderr: "Failed to authenticate: OAuth session expired and could not be refreshed" });
+  assert.match(m, /OAuth session expired/);
+  assert.match(m, /type \/login/);
+});
+
 test("usage limit says it resets, with a readable time", () => {
   const m = explainCliFailure({ error: "Claude AI usage limit reached|1792663200" });
   assert.match(m, /usage limit was reached/);

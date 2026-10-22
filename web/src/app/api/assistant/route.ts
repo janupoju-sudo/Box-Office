@@ -14,6 +14,8 @@ import { fencingReport } from "@/lib/cli-fencing.mjs";
 const ADVISOR_SCOPE = scopeFrom("Read,WebFetch,Glob,Grep");
 import { readPersonalizationState } from "@/lib/personalization-file.mjs";
 import { readJsonObject } from "@/lib/json-body";
+import { parseClaudeEvent } from "@/lib/run-cli-support.mjs";
+import { explainCliFailure } from "@/lib/boxoffice/cli-failure.mjs";
 
 /**
  * Human labels of the modes/_profile.md sections still identical to the template.
@@ -183,6 +185,10 @@ export async function POST(req: Request) {
     start(controller) {
       let buf = "";
       let emitted = false;
+      // Why a run that produced no reply stopped: Claude's terminal result error,
+      // else the end of stderr. Shown instead of a bare "no output".
+      let failure: string | null = null;
+      let stderrText = "";
       killer = setTimeout(() => {
         try {
           child.kill("SIGTERM");
@@ -237,19 +243,15 @@ export async function POST(req: Request) {
           const line = buf.slice(0, nl).trim();
           buf = buf.slice(nl + 1);
           if (!line) continue;
-          try {
-            const obj = JSON.parse(line);
-            if (obj.type === "stream_event" && obj.event?.type === "content_block_delta") {
-              const text = obj.event.delta?.text;
-              if (typeof text === "string") emit(text);
-            }
-          } catch {
-            /* partial / non-json line — skip */
-          }
+          const ev = parseClaudeEvent(line) as { text?: string; error?: string } | null;
+          if (!ev) continue;
+          if (typeof ev.text === "string") emit(ev.text);
+          if (typeof ev.error === "string") failure = ev.error;
         }
       });
       child.stderr.on("data", (d: Buffer) => {
         const s = d.toString();
+        stderrText = (stderrText + s).slice(-4000);
         if (/error|not found|denied|fatal/i.test(s)) {
           safeEnqueue(`\n[${spec.name}] ${s.trim()}\n`);
         }
@@ -258,9 +260,11 @@ export async function POST(req: Request) {
         safeEnqueue(`\n[error launching ${spec.name}: ${e.message}]`);
         safeClose();
       });
-      child.on("close", () => {
+      child.on("close", (code: number | null) => {
         if (!emitted) {
-          safeEnqueue("_(no output — is the CLI authenticated?)_");
+          safeEnqueue(explainCliFailure({ error: failure, stderr: stderrText, code, cliName: spec.name }));
+        } else if (failure) {
+          safeEnqueue(`\n\n${explainCliFailure({ error: failure, cliName: spec.name })}`);
         }
         safeClose();
       });

@@ -742,7 +742,7 @@ export function AssistantConsole() {
       // action-only response still counts, without approving its confirmation.
       if (!display.trim() && !hasActionOutput) {
         failed = true;
-        setStreamText("_(no output — is the CLI authenticated?)_");
+        setStreamText("_Claude Code replied with nothing to show. Try asking again; if it keeps happening, check that `claude -p \"hi\"` answers in Terminal._");
       }
     } catch (error) {
       failed = true;
